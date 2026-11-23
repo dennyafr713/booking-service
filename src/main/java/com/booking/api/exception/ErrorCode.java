@@ -5,6 +5,7 @@ public final class ErrorCode {
     public static final String VALIDATION_ERROR = "VALIDATION_ERROR";
     public static final String INVALID_REQUEST_BODY = "INVALID_REQUEST_BODY";
     public static final String INVALID_CREDENTIALS = "INVALID_CREDENTIALS";
+    public static final String INVALID_TIME = "INVALID_TIME";
     public static final String UNAUTHORIZED = "UNAUTHORIZED";
     public static final String FORBIDDEN = "FORBIDDEN";
     public static final String NOT_FOUND = "NOT_FOUND";

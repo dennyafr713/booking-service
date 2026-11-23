@@ -5,5 +5,5 @@ import com.booking.api.model.dto.response.AuthRes;
 
 public interface AuthService {
 
-    AuthRes login(AuthReq request);
+    AuthRes doLogin(AuthReq request);
 }

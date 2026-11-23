@@ -5,6 +5,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.booking.api.exception.ApiException;
 import com.booking.api.exception.ErrorCode;
@@ -26,7 +27,8 @@ public class AuthServiceImpl implements AuthService {
     private final JwtService jwtService;
 
     @Override
-    public AuthRes login(AuthReq request) {
+    @Transactional
+    public AuthRes doLogin(AuthReq request) {
         Authentication authentication;
         try {
             authentication = authenticationManager.authenticate(

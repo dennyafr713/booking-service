@@ -2,19 +2,16 @@ package com.booking.api.model.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.io.Serial;
-import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
 
 import com.booking.api.enums.Role;
-import com.booking.api.model.entity.base.Identity;
+import com.booking.api.model.entity.base.Base;
 
 @Getter
 @Setter
@@ -23,7 +20,7 @@ import com.booking.api.model.entity.base.Identity;
 @Table(name = "users")
 @AllArgsConstructor
 @NoArgsConstructor
-public class User extends Identity implements UserDetails {
+public class User extends Base implements UserDetails {
 
     @Serial
     private static final long serialVersionUID = 1L;
@@ -40,14 +37,6 @@ public class User extends Identity implements UserDetails {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 20)
     private Role role;
-
-    @CreationTimestamp
-    @Column(name = "created_at", nullable = false, updatable = false)
-    private LocalDateTime createdAt;
-
-    @UpdateTimestamp
-    @Column(name = "updated_at", nullable = false)
-    private LocalDateTime updatedAt;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
