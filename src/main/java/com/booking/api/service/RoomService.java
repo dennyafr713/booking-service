@@ -1,6 +1,6 @@
 package com.booking.api.service;
 
-import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import com.booking.api.model.dto.request.CreateRoomReq;
@@ -11,5 +11,5 @@ public interface RoomService {
 
     RoomRes doCreate(CreateRoomReq request);
 
-    List<AvailableRoomRes> doFindAvailable(Instant start, Instant end);
+    List<AvailableRoomRes> doFindAvailable(LocalDateTime start, LocalDateTime end);
 }

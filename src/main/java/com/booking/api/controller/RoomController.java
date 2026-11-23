@@ -1,8 +1,9 @@
 package com.booking.api.controller;
 
-import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.List;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -35,8 +36,8 @@ public class RoomController {
 
     @GetMapping("/available")
     public List<AvailableRoomRes> findAvailable(
-            @RequestParam("start_time") Instant start,
-            @RequestParam("end_time") Instant end) {
+            @RequestParam("start_time") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime start,
+            @RequestParam("end_time") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime end) {
         return roomService.doFindAvailable(start, end);
     }
 }

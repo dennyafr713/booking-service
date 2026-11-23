@@ -1,8 +1,6 @@
 package com.booking.api.service.impl;
 
-import java.time.Instant;
 import java.time.LocalDateTime;
-import java.time.ZoneOffset;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -40,18 +38,14 @@ public class RoomServiceImpl implements RoomService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<AvailableRoomRes> doFindAvailable(Instant start, Instant end) {
+    public List<AvailableRoomRes> doFindAvailable(LocalDateTime start, LocalDateTime end) {
         if (!end.isAfter(start)) {
             throw ApiException.badRequest(ErrorCode.INVALID_TIME,
                     "waktu berakhir harus lebih besar dari waktu mulai");
         }
 
-        return roomRepository.findAvailable(toUtc(start), toUtc(end)).stream()
+        return roomRepository.findAvailable(start, end).stream()
                 .map(AvailableRoomRes::from)
                 .toList();
-    }
-
-    private static LocalDateTime toUtc(Instant instant) {
-        return LocalDateTime.ofInstant(instant, ZoneOffset.UTC);
     }
 }

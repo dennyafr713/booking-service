@@ -33,5 +33,5 @@ public interface RoomRepository extends JpaRepository<Room, Long> {
                   )
             ORDER BY r.id
             """, nativeQuery = true)
-    List<Room> findAvailable(@Param("start") LocalDateTime startUtc, @Param("end") LocalDateTime endUtc);
+    List<Room> findAvailable(@Param("start") LocalDateTime start, @Param("end") LocalDateTime end);
 }
