@@ -53,13 +53,10 @@ CREATE TABLE IF NOT EXISTS bookings (
     ) WHERE (status = 'CONFIRMED')
 );
 
--- Overlap check / availability lookups: room + time window on CONFIRMED rows
 CREATE INDEX IF NOT EXISTS idx_bookings_room_time_confirmed
     ON bookings (room_id, start_time, end_time)
     WHERE status = 'CONFIRMED';
--- FK lookups
 CREATE INDEX IF NOT EXISTS idx_bookings_user_id ON bookings (user_id);
--- Monthly usage report
 CREATE INDEX IF NOT EXISTS idx_bookings_status_start ON bookings (status, start_time);
 
 -- ---------------------------------------------------------------------
