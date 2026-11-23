@@ -18,9 +18,11 @@ import com.booking.api.model.dto.response.AvailableRoomRes;
 import com.booking.api.model.dto.response.RoomRes;
 import com.booking.api.service.RoomService;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
+@Tag(name = "Rooms", description = "Pengelolaan dan pencarian ruangan")
 @RestController
 @RequestMapping("/rooms")
 @RequiredArgsConstructor

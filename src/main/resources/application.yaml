@@ -37,6 +37,17 @@ app:
     secret: ${JWT_SECRET:karakter-random-paling-minimal-32}
     expiration-minutes: ${JWT_EXPIRATION_MINUTES:1440}
 
+springdoc:
+  api-docs:
+    enabled: ${SWAGGER_ENABLED:true}
+    path: /v3/api-docs
+  swagger-ui:
+    enabled: ${SWAGGER_ENABLED:true}
+    path: /swagger-ui.html
+    operations-sorter: method
+    tags-sorter: alpha
+    persist-authorization: true
+
 logging:
   level:
     org.hibernate.orm.incubating: ERROR

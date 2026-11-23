@@ -32,6 +32,8 @@ public class SecurityConfig {
                                 .authorizeHttpRequests(auth -> auth
                                                 .requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
                                                 .requestMatchers("/error").permitAll()
+                                                .requestMatchers("/v3/api-docs/**", "/swagger-ui/**",
+                                                                "/swagger-ui.html").permitAll()
                                                 .requestMatchers(HttpMethod.POST, "/rooms").hasRole("ADMIN")
                                                 .anyRequest().authenticated())
                                 .exceptionHandling(e -> e

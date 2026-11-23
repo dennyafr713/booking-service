@@ -16,9 +16,11 @@ import com.booking.api.model.dto.response.CancelBookRes;
 import com.booking.api.model.entity.User;
 import com.booking.api.service.BookingService;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
+@Tag(name = "Bookings", description = "Booking dan pembatalan booking ruangan")
 @RestController
 @RequestMapping("/bookings")
 @RequiredArgsConstructor

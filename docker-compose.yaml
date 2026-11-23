@@ -1,0 +1,40 @@
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: booking-service-db
+    environment:
+      POSTGRES_DB: ${DB_NAME:-booking}
+      POSTGRES_USER: ${DB_USERNAME:-booking}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-booking}
+      TZ: UTC
+      PGTZ: UTC
+    volumes:
+      - ./src/main/resources/schema.sql:/docker-entrypoint-initdb.d/01-schema.sql:ro
+      - booking-service-db-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  app:
+    build: .
+    container_name: booking-service-app
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      APP_PORT: 8080
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_NAME: ${DB_NAME:-booking}
+      DB_USERNAME: ${DB_USERNAME:-booking}
+      DB_PASSWORD: ${DB_PASSWORD:-booking}
+      JWT_SECRET: ${JWT_SECRET:-change-me-this-is-a-dev-only-secret-key-at-least-32-bytes}
+      JWT_EXPIRATION_MINUTES: ${JWT_EXPIRATION_MINUTES:-1440}
+    ports:
+      - "${APP_PORT:-8080}:8080"
+    restart: unless-stopped
+
+volumes:
+  booking-service-db-data:
